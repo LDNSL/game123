@@ -119,9 +119,8 @@ func _physics_process(delta: float) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	#state type movement
 	#crouching
-	if Input.is_action_pressed("crouch") and is_on_floor() == false and Input.is_action_pressed("sprint"):
+	if Input.is_action_pressed("crouch") and is_on_floor() == false and Input.is_action_pressed("sprint") == false:
 		anchor_fall = true
-		print("true")
 	else:
 		anchor_fall = false
 	if Input.is_action_pressed("crouch") or sliding:
