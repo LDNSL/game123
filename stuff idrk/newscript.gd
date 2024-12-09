@@ -75,9 +75,9 @@ var dash_cooldown = 0
 var dash_velocity_multi = 100
 var dash_vector = Vector2.ZERO
 var dash_direction = Vector3.ZERO
-var dash_speed = 30
-var aim = 0
-
+var dash_speed = 40
+var aim_vector = 0
+var dash_cooldown_countdown = 1
 
 #sliding
 var slide_timer = 0.0
@@ -117,10 +117,14 @@ func _physics_process(delta: float) -> void:
 		else:
 			camera_lcok = true
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	if Input.is_action_pressed("dash"):
+	if Input.is_action_pressed("dash") and dash_cooldown <= 0:
 		print("dash")
-		aim = camera_direction
+		aim_vector = (crosshair.global_transform.origin - player_camera.global_transform.origin).normalized()
+		extra_velocity += aim_vector * dash_speed 
 		dashing = true
+		dash_cooldown = 3
+	else:
+		dash_cooldown += -dash_cooldown_countdown
 	#state type movement
 	#crouching
 	if Input.is_action_pressed("crouch") and is_on_floor() == false:
@@ -262,22 +266,19 @@ func _physics_process(delta: float) -> void:
 		direction = (transform.basis * Vector3(slide_vector.x,0.0,slide_vector.y)).normalized()
 		SPEED = (slide_timer + 0.1) * slide_speed
 		velocity.z = direction.z * (slide_timer + 0.1) * slide_speed
+	if dashing:
+		velocity += extra_velocity
+		extra_velocity = Vector3.ZERO
+		dashing = false
 	if wall_running:
 		direction = (transform.basis * Vector3(0,0.0,-1)).normalized() #place holder
 		last_velocity = SPEED
-	if dashing:
-		dash_direction += camera_direction.z * input_dir.y
-		dash_direction += aim.x * input_dir.x
-		dash_direction = dash_direction.normalized()
-		dash_vector = dash_direction * dash_speed
-		velocity += dash_vector 
-		dashing = false
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED 
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED) 
-		velocity.z = move_toward(velocity.z, 0, SPEED) 
+		velocity.z = move_toward(velocity.z, 0, SPEED)
 	last_velocity = velocity
 	move_and_slide()
 	

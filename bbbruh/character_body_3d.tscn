@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://4321ua01kx7u"]
+[gd_scene load_steps=13 format=3 uid="uid://4321ua01kx7u"]
 
 [ext_resource type="Script" path="res://stuff idrk/newscript.gd" id="1_2ou3l"]
+[ext_resource type="Texture2D" uid="uid://ur4ruicoajfd" path="res://textures/kenney_prototype-textures/PNG/Green/texture_01.png" id="2_8sato"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pyoyd"]
 
@@ -214,7 +215,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.636, 0)
 [node name="Camera3D" type="Camera3D" parent="neck/head/eyes"]
 
 [node name="Sprite3D" type="Sprite3D" parent="neck/head/eyes/Camera3D"]
-transform = Transform3D(1, -1.02154e-08, 0, 9.74978e-10, 1, -6.98492e-10, -1.11759e-08, 0, 1, 0, 0, -3.38137)
+transform = Transform3D(0.01, -9.74978e-12, 1.11759e-10, 9.74978e-12, 0.01, 1.11022e-18, -1.11759e-10, -1.00126e-18, 0.01, 0, 0, -3.38137)
+texture = ExtResource("2_8sato")
 
 [node name="camera cnimations" type="AnimationPlayer" parent="neck/head/eyes"]
 libraries = {
