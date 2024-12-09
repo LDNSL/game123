@@ -119,8 +119,9 @@ func _physics_process(delta: float) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	#state type movement
 	#crouching
-	if Input.is_action_pressed("crouch") and is_on_floor() == false:
+	if Input.is_action_pressed("crouch") and is_on_floor() == false and Input.is_action_pressed("sprint"):
 		anchor_fall = true
+		print("true")
 	else:
 		anchor_fall = false
 	if Input.is_action_pressed("crouch") or sliding:
@@ -130,7 +131,7 @@ func _physics_process(delta: float) -> void:
 		crouching_collision.disabled = false
 
 		#start of slide
-		if sprinting and input_dir != Vector2.ZERO and is_on_floor():
+		if sprinting and input_dir != Vector2.ZERO and is_on_floor() or Input.is_action_just_pressed("crouch"):
 			sliding = true
 			slide_vector = input_dir
 			free_looking = true
@@ -278,6 +279,8 @@ func _physics_process(delta: float) -> void:
 			if direction == Vector3.ZERO:
 				direction = (transform.basis * Vector3(0,0.0,-1)).normalized()
 			SPEED = dash_speed
+			if is_on_floor() == false:
+				SPEED += gravity/5
 			sliding = false
 			print("true")
 		else:
