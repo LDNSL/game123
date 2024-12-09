@@ -74,7 +74,7 @@ var dash_cooldown = 0
 var dash_velocity_multi = 100
 var dash_vector = Vector2.ZERO
 var dash_direction = Vector3.ZERO
-var dash_speed = 400
+var dash_speed = 30.0
 var aim_vector = 0
 var dash_cooldown_countdown = 0.1
 @onready var crosshair = $neck/head/eyes/Camera3D/Sprite3D
@@ -159,6 +159,7 @@ func _physics_process(delta: float) -> void:
 		dashing = true
 		dash_cooldown = 3
 		print("dash")
+		dash_direction = input_dir
 	elif  dash_cooldown > 0:
 		print("cooldown")
 		dash_cooldown += -2 * delta
@@ -205,7 +206,7 @@ func _physics_process(delta: float) -> void:
 		eyes.position.x = lerp(eyes.position.x,head_bobbing_vector.x*0.0,delta*lerp_speed)		
 
 	# Add the gravity.
-	if not is_on_floor() and wall_running == false:
+	if not is_on_floor() and wall_running == false or dashing == true :
 		velocity.y += -gravity * delta
 		falling = true
 		if anchor_fall == true:
@@ -263,19 +264,25 @@ func _physics_process(delta: float) -> void:
 		if input_dir != Vector2.ZERO:
 			direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(),delta*air_lerp_speed)
 	if sliding:
-		direction = (transform.basis * Vector3(slide_vector.x,0.0,slide_vector.y)).normalized()
-		SPEED = (slide_timer + 0.1) * slide_speed
-		velocity.z = direction.z * (slide_timer + 0.1) * slide_speed
+		if dashing == false:
+			direction = (transform.basis * Vector3(slide_vector.x,0.0,slide_vector.y)).normalized()
+			SPEED = slide_speed * (slide_timer + 0.1) + last_velocity.x / 10
+			velocity.z = direction.z * (slide_timer + 0.1) * slide_speed * 100
 	if wall_running:
 		direction = (transform.basis * Vector3(0,0.0,-1)).normalized() #place holder
 		last_velocity = SPEED
+		dashing = false
 	if dashing:
-		velocity.y = 0
-		direction = (transform.basis * Vector3(input_dir.x,0.0, input_dir.y)).normalized()
-		if direction == Vector3.ZERO:
-			direction = (transform.basis * Vector3(0,0.0,-1)).normalized()
-		velocity = direction * dash_speed
-		dashing = false 
+		if dash_cooldown >= 2.5:
+			direction = (transform.basis * Vector3(dash_direction.x,0.0, dash_direction.y)).normalized()
+			if direction == Vector3.ZERO:
+				direction = (transform.basis * Vector3(0,0.0,-1)).normalized()
+			SPEED = dash_speed
+			sliding = false
+			print("true")
+		else:
+			dashing = false
+			print("false")
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED 
