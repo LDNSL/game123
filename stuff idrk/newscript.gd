@@ -70,14 +70,14 @@ var air_lerp_speed = 5.0
 var doublejump_cooldown = false
 
 #dashing
-@onready var crosshair = $neck/head/eyes/Camera3D/Sprite3D
 var dash_cooldown = 0
 var dash_velocity_multi = 100
 var dash_vector = Vector2.ZERO
 var dash_direction = Vector3.ZERO
-var dash_speed = 40
+var dash_speed = 400
 var aim_vector = 0
-var dash_cooldown_countdown = 1
+var dash_cooldown_countdown = 0.1
+@onready var crosshair = $neck/head/eyes/Camera3D/Sprite3D
 
 #sliding
 var slide_timer = 0.0
@@ -117,14 +117,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			camera_lcok = true
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	if Input.is_action_pressed("dash") and dash_cooldown <= 0:
-		print("dash")
-		aim_vector = (crosshair.global_transform.origin - player_camera.global_transform.origin).normalized()
-		extra_velocity += aim_vector * dash_speed 
-		dashing = true
-		dash_cooldown = 3
-	else:
-		dash_cooldown += -dash_cooldown_countdown
 	#state type movement
 	#crouching
 	if Input.is_action_pressed("crouch") and is_on_floor() == false:
@@ -162,6 +154,14 @@ func _physics_process(delta: float) -> void:
 			walking = true
 			sprinting = false
 			crouching = false
+	# handles dash
+	if Input.is_action_pressed("dash") and dash_cooldown <= 0:
+		dashing = true
+		dash_cooldown = 3
+		print("dash")
+	elif  dash_cooldown > 0:
+		print("cooldown")
+		dash_cooldown += -2 * delta
 	#handles free looking
 	if Input.is_action_pressed("freelook") or sliding: # or wall_running:
 		free_looking = true
@@ -258,7 +258,7 @@ func _physics_process(delta: float) -> void:
 			camera_cnimations.play("landing_animation")
 	# Get the input direction and handle the movement/deceleration.
 	if is_on_floor():
-		direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(),delta*lerp_speed)
+		direction = lerp(direction,(transform.basis * Vector3(input_dir.x,0.0, input_dir.y)).normalized(),delta*lerp_speed)
 	else:
 		if input_dir != Vector2.ZERO:
 			direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(),delta*air_lerp_speed)
@@ -266,13 +266,16 @@ func _physics_process(delta: float) -> void:
 		direction = (transform.basis * Vector3(slide_vector.x,0.0,slide_vector.y)).normalized()
 		SPEED = (slide_timer + 0.1) * slide_speed
 		velocity.z = direction.z * (slide_timer + 0.1) * slide_speed
-	if dashing:
-		velocity += extra_velocity
-		extra_velocity = Vector3.ZERO
-		dashing = false
 	if wall_running:
 		direction = (transform.basis * Vector3(0,0.0,-1)).normalized() #place holder
 		last_velocity = SPEED
+	if dashing:
+		velocity.y = 0
+		direction = (transform.basis * Vector3(input_dir.x,0.0, input_dir.y)).normalized()
+		if direction == Vector3.ZERO:
+			direction = (transform.basis * Vector3(0,0.0,-1)).normalized()
+		velocity = direction * dash_speed
+		dashing = false 
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED 
