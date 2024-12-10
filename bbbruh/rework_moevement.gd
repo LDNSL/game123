@@ -74,14 +74,15 @@ var dash_cooldown = 0
 var dash_velocity_multi = 100
 var dash_vector = Vector2.ZERO
 var dash_direction = Vector3.ZERO
-var dash_speed = 30.0
+var dash_speed_air = 25.0
+var dash_speed_floor = 400.0
 var aim_vector = 0
 var dash_cooldown_countdown = 0.1
 @onready var crosshair = $neck/head/eyes/Camera3D/Sprite3D
 
 #sliding
 var slide_timer = 0.0
-var slide_timer_max = 1.0
+var slide_timer_max = 2.0
 var slide_vector = Vector2.ZERO
 var slide_speed = 17
 
@@ -123,22 +124,22 @@ func _physics_process(delta: float) -> void:
 		anchor_fall = true
 	else:
 		anchor_fall = false
-	if Input.is_action_pressed("crouch") or sliding:
+	if Input.is_action_pressed("crouch") and sliding == false:
 		SPEED = lerp(SPEED,crouch_speed,delta*lerp_speed)
 		head.position.y = lerp(head.position.y,crouching_depth,delta*lerp_speed)
 		standing_collision.disabled = true
 		crouching_collision.disabled = false
 
 		#start of slide
-		if sprinting and input_dir != Vector2.ZERO and is_on_floor() or Input.is_action_just_pressed("crouch"):
+		if sprinting and input_dir != Vector2.ZERO and is_on_floor() or Input.is_action_just_pressed("crouch") and is_on_floor() == false:
 			sliding = true
 			slide_vector = input_dir
 			free_looking = true
 			slide_timer = slide_timer_max
-			SPEED = abs(last_velocity.x) + abs(last_velocity.y)
+			SPEED = abs(last_velocity.x) + abs(last_velocity.z)
 		walking = false
 		sprinting = false
-		crouching = true
+		crouching = false
 	elif !crouching_raycast.is_colliding():
 		#not crouching
 		standing_collision.disabled = false
@@ -159,10 +160,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("dash") and dash_cooldown <= 0:
 		dashing = true
 		dash_cooldown = 3
-		print("dash")
 		dash_direction = input_dir
+		print("dashed")
 	elif  dash_cooldown > 0:
-		print("cooldown")
 		dash_cooldown += -2 * delta
 	#handles free looking
 	if Input.is_action_pressed("freelook") or sliding: # or wall_running:
@@ -181,7 +181,7 @@ func _physics_process(delta: float) -> void:
 	#slide end
 	if sliding:
 		slide_timer -= delta
-		if slide_timer <= 0:
+		if slide_timer <= 1:
 			sliding = false
 			free_looking = false
 			
@@ -230,13 +230,15 @@ func _physics_process(delta: float) -> void:
 					wall_running = true
 					wall_running_vector = input_dir
 					velocity.y = 0
-					SPEED = abs(last_velocity.x) + abs(last_velocity.y)
+					SPEED = abs(last_velocity.x) + abs(last_velocity.z)
 				elif wall_run_check_left.is_colliding() == true:
 					camera_cnimations.play("wall_run_left")
 					wall_running = true
 					wall_running_vector = input_dir
 					velocity.y = 0
-					SPEED = abs(last_velocity.x) + abs(last_velocity.y)
+					SPEED = abs(last_velocity.x) + abs(last_velocity.z)
+					print(abs(last_velocity.x))
+					print(abs(last_velocity.z))
 			elif doublejump_cooldown == false and is_on_floor() == false and wall_running == false:
 				velocity.y = JUMP_VELOCITY
 				camera_cnimations.play("jumping_animation")
@@ -269,9 +271,10 @@ func _physics_process(delta: float) -> void:
 	if sliding:
 		if dashing == false:
 			direction = (transform.basis * Vector3(slide_vector.x,0.0,slide_vector.y)).normalized()
-			print("speed")
-			SPEED = SPEED - (0.9) * delta
-			velocity.z = direction.z * (slide_timer + 0.1) * slide_speed * 100
+			if direction == Vector3.ZERO:
+				direction = (transform.basis * Vector3(0,0.0,-1)).normalized() 
+			print(SPEED)
+			velocity.z = direction.z * (slide_timer + 0.1) * SPEED * 100
 	if wall_running:
 		direction = (transform.basis * Vector3(0,0.0,-1)).normalized() #place holder
 		print(SPEED)
@@ -279,16 +282,17 @@ func _physics_process(delta: float) -> void:
 	if dashing:
 		if dash_cooldown >= 2.5:
 			direction = (transform.basis * Vector3(dash_direction.x,0.0, dash_direction.y)).normalized()
+			if is_on_floor():
+				SPEED += dash_speed_floor * delta
+			else:
+				SPEED += dash_speed_air * delta
 			if direction == Vector3.ZERO:
 				direction = (transform.basis * Vector3(0,0.0,-1)).normalized()
-			SPEED = dash_speed
-			if is_on_floor() == false:
-				SPEED += gravity/5
-			sliding = false
-			print("true")
 		else:
 			dashing = false
-			print("false")
+		if is_on_floor():
+			print("floor dash")
+
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED 

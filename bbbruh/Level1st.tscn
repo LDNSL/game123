@@ -73,5 +73,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.7895, 10.0944, -15.8673)
 size = Vector3(40.9954, 8.37408, 0.849487)
 material = ExtResource("1_f4rlw")
 
+[node name="CSGBox3D10" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-0.0189357, 0, -0.999821, 0, 1, 0, 0.999821, 0, -0.0189357, 72.9575, 10.9267, -5.4054)
+size = Vector3(41.4318, 8.37408, 0.849487)
+material = ExtResource("1_f4rlw")
+
 [node name="CharacterBody3D2" parent="." instance=ExtResource("1_qcuqh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07633, 3.96964, 0)
