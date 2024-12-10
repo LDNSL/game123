@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dwmib8ge3wnwg"]
 
-[ext_resource type="PackedScene" uid="uid://4321ua01kx7u" path="res://bbbruh/character_body_3d.tscn" id="1_d0dm1"]
 [ext_resource type="Material" uid="uid://bqchdi5hikxq0" path="res://bbbruh/test_texture2.tres" id="1_f4rlw"]
+[ext_resource type="PackedScene" uid="uid://e75mu5ja2p0o" path="res://bbbruh/Testing_body.tscn" id="1_qcuqh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1dxqq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -17,9 +17,6 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Node3D" type="Node3D"]
-
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_d0dm1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.56143, 8.62064, -11.958)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_j5jal")
@@ -70,3 +67,11 @@ material = ExtResource("1_f4rlw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.29392, 8.48446, -16.4047)
 size = Vector3(10.7951, 5.28757, 0.849487)
 material = ExtResource("1_f4rlw")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.7895, 10.0944, -15.8673)
+size = Vector3(40.9954, 8.37408, 0.849487)
+material = ExtResource("1_f4rlw")
+
+[node name="CharacterBody3D2" parent="." instance=ExtResource("1_qcuqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07633, 3.96964, 0)

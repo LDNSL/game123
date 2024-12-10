@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://e75mu5ja2p0o"]
 
-[ext_resource type="Script" path="res://stuff idrk/newscript.gd" id="1_1dfga"]
+[ext_resource type="Script" path="res://bbbruh/rework_moevement.gd" id="1_1m68h"]
 [ext_resource type="Texture2D" uid="uid://ur4ruicoajfd" path="res://textures/kenney_prototype-textures/PNG/Green/texture_01.png" id="2_x1unk"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pyoyd"]
@@ -183,7 +183,7 @@ _data = {
 }
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
-script = ExtResource("1_1dfga")
+script = ExtResource("1_1m68h")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_pyoyd")
