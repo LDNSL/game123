@@ -146,16 +146,17 @@ func _physics_process(delta: float) -> void:
 		crouching_collision.disabled = true
 		head.position.y = lerp(head.position.y,0.0,delta*lerp_speed)
 		#sprint
-		if Input.is_action_pressed("sprint") and is_on_floor():
-			SPEED =  lerp(SPEED,sprint_speed,delta*lerp_speed)
-			walking = false
-			sprinting = true
-			crouching = false
-		elif Input.is_action_just_released("sprint") or is_on_floor():
-			SPEED =  lerp(SPEED,walk_speed,delta*lerp_speed)
-			walking = true
-			sprinting = false
-			crouching = false
+		if sliding == false:
+			if Input.is_action_pressed("sprint") and is_on_floor():
+				SPEED =  lerp(SPEED,sprint_speed,delta*lerp_speed)
+				walking = false
+				sprinting = true
+				crouching = false
+			elif Input.is_action_just_released("sprint") or is_on_floor():
+				SPEED =  lerp(SPEED,walk_speed,delta*lerp_speed)
+				walking = true
+				sprinting = false
+				crouching = false
 	# handles dash
 	if Input.is_action_pressed("dash") and dash_cooldown <= 0:
 		dashing = true
@@ -221,6 +222,7 @@ func _physics_process(delta: float) -> void:
 	if !crouching_raycast.is_colliding() == true:
 		if Input.is_action_just_pressed("jump"):
 			sliding = false
+			dashing = false
 			if is_on_floor():
 				velocity.y = JUMP_VELOCITY
 				camera_cnimations.play("jumping_animation")
@@ -262,6 +264,15 @@ func _physics_process(delta: float) -> void:
 			camera_cnimations.play("rolling_animation")
 		elif last_velocity.y < -2.0:
 			camera_cnimations.play("landing_animation")
+	if is_on_floor() == true:
+		if SPEED >= 35: # max speed of player
+			SPEED = 35.0
+	if sliding == true:
+		if SPEED >= 25: # max speed of player
+			SPEED = 25.0
+	else:
+		if SPEED >= 25: # max air speed of player
+			SPEED = 25.0
 	# Get the input direction and handle the movement/deceleration.
 	if is_on_floor():
 		direction = lerp(direction,(transform.basis * Vector3(input_dir.x,0.0, input_dir.y)).normalized(),delta*lerp_speed)
@@ -297,8 +308,9 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED 
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED) 
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		if dashing == false:
+			velocity.x = move_toward(velocity.x, 0, SPEED) 
+			velocity.z = move_toward(velocity.z, 0, SPEED)
 	last_velocity = velocity
 	move_and_slide()
 	
