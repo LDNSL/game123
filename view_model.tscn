@@ -1,6 +1,7 @@
-[gd_scene load_steps=66 format=4 uid="uid://cg74gcglgxef1"]
+[gd_scene load_steps=67 format=4 uid="uid://cg74gcglgxef1"]
 
 [ext_resource type="Material" uid="uid://da7ly3ig6sntf" path="res://materials/shotgun_mat.tres" id="1_155o8"]
+[ext_resource type="Material" uid="uid://cbrnd76j4iyyr" path="res://materials/hands_mat.tres" id="2_wfidg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2rro"]
 resource_name = "ShotgunMaterial"
@@ -756,13 +757,15 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1wdjb")
 
 [node name="View_model_camera" type="Camera3D"]
+fov = 35.0
 
 [node name="fps_rig" type="Node3D" parent="."]
 
 [node name="shotgun" type="Node3D" parent="fps_rig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0098802, -0.026644, 0.0448482)
 
 [node name="shotgun_model" type="Node3D" parent="fps_rig/shotgun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000131488, 0, -0.568469)
+transform = Transform3D(0.0101004, 0.0111293, 0.999887, 0.00528935, 0.999923, -0.0111832, -0.999935, 0.00540173, 0.0100408, 0.193898, -0.242133, -0.701757)
 
 [node name="Body_lowpoly" type="MeshInstance3D" parent="fps_rig/shotgun/shotgun_model"]
 material_override = ExtResource("1_155o8")
@@ -795,90 +798,212 @@ material_overlay = ExtResource("1_155o8")
 mesh = SubResource("ArrayMesh_skd8t")
 skeleton = NodePath("")
 
-[node name="Hand model" type="Node3D" parent="fps_rig/shotgun"]
-transform = Transform3D(0.0471041, 0, 0, 0, 0.0471041, 0, 0, 0, 0.0471041, 0.129827, 0.131421, -0.547894)
+[node name="left_hand" type="Node3D" parent="fps_rig/shotgun"]
+transform = Transform3D(-1.10154e-09, -0.0443687, -0.0158182, 0.0471041, -2.03812e-09, 7.69595e-10, -8.44881e-10, -0.0158182, 0.0443687, 0.172183, -0.127557, -0.82618)
 
-[node name="hand" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.916718)
+[node name="hand" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand"]
+transform = Transform3D(0.716279, -0.687854, -0.117491, 0.627273, 0.708445, -0.323474, 0.305738, 0.157999, 0.938916, 0.371546, -0.801533, 0.716564)
 mesh = SubResource("ArrayMesh_smnhd")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="arm_lower" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.118854, 0.00119257)
+[node name="arm_lower" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand"]
+transform = Transform3D(0.992754, 0.0758271, 0.0932232, -0.0889888, 0.985232, 0.146282, -0.0807543, -0.153518, 0.984841, -4.76837e-07, -0.118854, 0.00119209)
 mesh = SubResource("ArrayMesh_m57f8")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="index_0" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand"]
+[node name="index_0" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.635515, 0, -1.8433)
 mesh = SubResource("ArrayMesh_vwpxt")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="index_1" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand/index_0"]
+[node name="index_1" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand/index_0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.520542)
 mesh = SubResource("ArrayMesh_au70s")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="index_2" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand/index_0/index_1"]
+[node name="index_2" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand/index_0/index_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.496836)
 mesh = SubResource("ArrayMesh_0h4lv")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="middle_0" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand"]
+[node name="middle_0" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.219422, 0, -1.96367)
 mesh = SubResource("ArrayMesh_e5krv")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="middle_1" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand/middle_0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.595449)
+[node name="middle_1" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand/middle_0"]
+transform = Transform3D(0.999997, 0.000874517, 0.00214627, -0.000870419, 0.999998, -0.00193629, -0.00214794, 0.00193444, 0.999996, 0, 0, -0.595448)
 mesh = SubResource("ArrayMesh_7dm16")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="middle_2" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand/middle_0/middle_1"]
+[node name="middle_2" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand/middle_0/middle_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.576577)
 mesh = SubResource("ArrayMesh_lgwyp")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="pinky_0" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand"]
+[node name="pinky_0" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.636916, 0, -1.87594)
 mesh = SubResource("ArrayMesh_53ouv")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="pinky_1" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand/pinky_0"]
+[node name="pinky_1" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand/pinky_0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.508631)
 mesh = SubResource("ArrayMesh_vswab")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="pinky_2" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand/pinky_0/pinky_1"]
+[node name="pinky_2" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand/pinky_0/pinky_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.484157)
 mesh = SubResource("ArrayMesh_nxdlq")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="ring_0" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand"]
+[node name="ring_0" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22161, 0, -1.94957)
 mesh = SubResource("ArrayMesh_usdt5")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="ring_1" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand/ring_0"]
+[node name="ring_1" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand/ring_0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.578411)
 mesh = SubResource("ArrayMesh_bbxen")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="ring_2" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand/ring_0/ring_1"]
+[node name="ring_2" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand/ring_0/ring_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.558439)
 mesh = SubResource("ArrayMesh_1nt0j")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="thumb_0" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand"]
-transform = Transform3D(1.19867, 0, 0, 0, 1.19867, 0, 0, 0, 1.19867, 0.71163, -0.0538707, -0.365427)
+[node name="thumb_0" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand"]
+transform = Transform3D(1.03783, -0.132, 0.585072, 0.0633331, 1.18687, 0.15543, -0.596425, -0.10366, 1.03458, 0.71163, -0.0538714, -0.365427)
 mesh = SubResource("ArrayMesh_8cr7w")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="thumb_1" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand/thumb_0"]
+[node name="thumb_1" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand/thumb_0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.418848, 0, -0.541475)
 mesh = SubResource("ArrayMesh_6ajme")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
 
-[node name="thumb_2" type="MeshInstance3D" parent="fps_rig/shotgun/Hand model/hand/thumb_0/thumb_1"]
+[node name="thumb_2" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand/hand/thumb_0/thumb_1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.286444, 0, -0.397435)
 mesh = SubResource("ArrayMesh_0d1kq")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="right_hand" type="Node3D" parent="fps_rig/shotgun"]
+transform = Transform3D(-2.05898e-09, -0.0471041, 0, 0.0471041, -2.05898e-09, 0, 0, 0, 0.0471041, 0.218676, -0.104758, -0.478142)
+
+[node name="hand" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0150781, -7.15256e-07, 0.903659)
+mesh = SubResource("ArrayMesh_smnhd")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="arm_lower" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.118854, 0.00119257)
+mesh = SubResource("ArrayMesh_m57f8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="index_0" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.635515, 0, -1.8433)
+mesh = SubResource("ArrayMesh_vwpxt")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="index_1" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand/index_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.520542)
+mesh = SubResource("ArrayMesh_au70s")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="index_2" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand/index_0/index_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.496836)
+mesh = SubResource("ArrayMesh_0h4lv")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="middle_0" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.219422, 0, -1.96367)
+mesh = SubResource("ArrayMesh_e5krv")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="middle_1" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand/middle_0"]
+transform = Transform3D(1, -6.33092e-09, -2.2658e-08, -6.33094e-09, 0.855165, -0.518355, 2.2658e-08, 0.518355, 0.855165, 0.0223868, -0.0364819, -0.554112)
+mesh = SubResource("ArrayMesh_7dm16")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="middle_2" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand/middle_0/middle_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.576577)
+mesh = SubResource("ArrayMesh_lgwyp")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="pinky_0" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.636916, 0, -1.87594)
+mesh = SubResource("ArrayMesh_53ouv")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="pinky_1" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand/pinky_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.508631)
+mesh = SubResource("ArrayMesh_vswab")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="pinky_2" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand/pinky_0/pinky_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.484157)
+mesh = SubResource("ArrayMesh_nxdlq")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="ring_0" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22161, 0, -1.94957)
+mesh = SubResource("ArrayMesh_usdt5")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="ring_1" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand/ring_0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.578411)
+mesh = SubResource("ArrayMesh_bbxen")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="ring_2" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand/ring_0/ring_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.558439)
+mesh = SubResource("ArrayMesh_1nt0j")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="thumb_0" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand"]
+transform = Transform3D(0.697023, -0.975138, -0.00922327, 0.975179, 0.697015, 0.00387701, 0.00220921, -0.00975804, 1.19863, 0.615492, -0.0147023, -0.372454)
+mesh = SubResource("ArrayMesh_8cr7w")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="thumb_1" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand/thumb_0"]
+transform = Transform3D(0.942032, -0.250377, -0.223356, 0.160554, 0.920912, -0.355167, 0.294617, 0.298718, 0.907727, 0.418848, 1.19209e-07, -0.541474)
+mesh = SubResource("ArrayMesh_6ajme")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
+
+[node name="thumb_2" type="MeshInstance3D" parent="fps_rig/shotgun/right_hand/hand/thumb_0/thumb_1"]
+transform = Transform3D(0.697313, -0.0460425, 0.715287, -0.071134, 0.988563, 0.13298, -0.713229, -0.14361, 0.686062, 0.286445, 7.15256e-07, -0.397435)
+mesh = SubResource("ArrayMesh_0d1kq")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_wfidg")
