@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://da7ly3ig6sntf"]
+
+[ext_resource type="Texture2D" uid="uid://bmbn73wmi4ful" path="res://models/shotgun_textures/Shotgun_UE4_BaseColor.png" id="1_0xivl"]
+[ext_resource type="Texture2D" uid="uid://6i84qq0l3cre" path="res://models/shotgun_textures/Shotgun_UE4_OcclusionRoughnessMetallic.png" id="2_dvy8o"]
+[ext_resource type="Texture2D" uid="uid://b2lv0f7qi16g5" path="res://models/shotgun_textures/Shotgun_UE4_Normal.png" id="3_gb70h"]
+
+[resource]
+albedo_texture = ExtResource("1_0xivl")
+metallic = 1.0
+metallic_texture = ExtResource("2_dvy8o")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_dvy8o")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_gb70h")
+ao_enabled = true
+ao_texture = ExtResource("2_dvy8o")
