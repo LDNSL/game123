@@ -44,13 +44,14 @@ var mouse_sense = 0.25
 var camera_lcok = true
 var crouching_depth = -0.25
 var free_look_tilt_amount = 5
+var slide_tilt_direction = Vector2.ZERO
 var camera_direction = Vector3.ZERO
 const head_bobbing_speed_sprint = 22
 const head_bobbing_speed_walk = 14
 const head_bobbing_speed_crouch = 10
 
-const head_bobbing_intensity_sprint = 0.02
-const head_bobbing_intensity_walk = 0.01
+const head_bobbing_intensity_sprint = 0.25
+const head_bobbing_intensity_walk = 0.25 / 2
 const head_bobbing_intensity_crouch = 0.05
 
 var head_bobbing_vector = Vector2.ZERO
@@ -169,15 +170,16 @@ func _physics_process(delta: float) -> void:
 		dashing = true
 		dash_cooldown = 3
 		dash_direction = input_dir
-		print("dashed")
 	elif  dash_cooldown > 0:
 		dash_cooldown += -2 * delta
 	#handles free looking
 	if Input.is_action_pressed("freelook") or sliding: # or wall_running:
 		free_looking = true
-		
 		if sliding:
-			eyes.rotation.z = lerp(eyes.rotation.z,-deg_to_rad(6),delta*lerp_speed)
+			if slide_vector.x >= 0.1:
+				eyes.rotation.z = lerp(eyes.rotation.z,-deg_to_rad(6),delta*lerp_speed)
+			else:
+				eyes.rotation.z = lerp(eyes.rotation.z,-deg_to_rad(-6),delta*lerp_speed)
 		else:
 			eyes.rotation.z = -deg_to_rad(neck.rotation.y*free_look_tilt_amount)
 	else:
@@ -246,8 +248,6 @@ func _physics_process(delta: float) -> void:
 					wall_running_vector = input_dir
 					velocity.y = 0
 					SPEED = abs(last_velocity.x) + abs(last_velocity.z)
-					print(abs(last_velocity.x))
-					print(abs(last_velocity.z))
 			elif doublejump_cooldown == false and is_on_floor() == false and wall_running == false:
 				velocity.y = JUMP_VELOCITY
 				camera_cnimations.play("jumping_animation")
@@ -291,11 +291,9 @@ func _physics_process(delta: float) -> void:
 			direction = (transform.basis * Vector3(slide_vector.x,0.0,slide_vector.y)).normalized()
 			if direction == Vector3.ZERO:
 				direction = (transform.basis * Vector3(0,0.0,-1)).normalized() 
-			print(SPEED)
 			velocity.z = direction.z * (slide_timer + 0.1) * SPEED * 100
 	if wall_running:
 		direction = (transform.basis * Vector3(0,0.0,-1)).normalized() #place holder
-		print(SPEED)
 		dashing = false
 	if dashing:
 		if dash_cooldown >= 2.5:
@@ -311,8 +309,6 @@ func _physics_process(delta: float) -> void:
 				direction = (transform.basis * Vector3(0,0.0,-1)).normalized()
 		else:
 			dashing = false
-		if is_on_floor():
-			print("floor dash")
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED 
