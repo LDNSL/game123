@@ -168,6 +168,7 @@ func _physics_process(delta: float) -> void:
 	# handles dash
 	if Input.is_action_pressed("dash") and dash_cooldown <= 0:
 		dashing = true
+		crouching = false
 		dash_cooldown = 3
 		dash_direction = input_dir
 	elif  dash_cooldown > 0:
@@ -298,6 +299,7 @@ func _physics_process(delta: float) -> void:
 	if dashing:
 		if dash_cooldown >= 2.5:
 			sliding = false
+			crouching = false
 			if dash_cooldown >= 2.7:
 				velocity.y = 0
 			direction = (transform.basis * Vector3(dash_direction.x,0.0, dash_direction.y)).normalized()

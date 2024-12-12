@@ -28,6 +28,8 @@ func sway(sway_amount):
 func _input(event):
 	if shotgun:
 		if shotgun_in_use:
+			if event.is_action_pressed("inspect"):
+				animation_player.play("inspect")
 			if event.is_action_pressed("shoot"):
 				if !animation_player.is_playing():
 					animation_player.play("fire")
