@@ -35,6 +35,7 @@ var dashing = false
 
 
 # var related to camera
+@onready var weapon_camera = $neck/head/eyes/Camera3D/SubViewportContainer/SubViewport/View_model_camera
 @onready var eyes = $neck/head/eyes
 @onready var head = $neck/head
 @onready var player_camera = $neck/head/eyes/Camera3D
@@ -94,9 +95,11 @@ var wall_running_speed = Vector3.ZERO
 #handles camera
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$neck/head/eyes/Camera3D/SubViewportContainer/SubViewport.size = DisplayServer.window_get_size()
 
 func _input(event):
 	if event is InputEventMouseMotion:
+		
 		if free_looking:
 			neck.rotate_y(deg_to_rad(-event.relative.x * mouse_sense))
 			neck.rotation.y = clamp(neck.rotation. y,deg_to_rad(-145),deg_to_rad(145))
@@ -105,9 +108,13 @@ func _input(event):
 		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sense))
 		head.rotation.x = clamp(head.rotation. x,deg_to_rad(-89),deg_to_rad(89))
 		camera_direction = player_camera.get_global_transform().basis
+		weapon_camera.sway(Vector2(event.relative.x, event.relative.y))
 
 
 func _physics_process(delta: float) -> void:
+	#gun_view
+	weapon_camera.global_transform = player_camera.global_transform
+	
 	#decides direction
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	#unlocks camera remove after testing
@@ -292,6 +299,9 @@ func _physics_process(delta: float) -> void:
 		dashing = false
 	if dashing:
 		if dash_cooldown >= 2.5:
+			sliding = false
+			if dash_cooldown >= 2.7:
+				velocity.y = 0
 			direction = (transform.basis * Vector3(dash_direction.x,0.0, dash_direction.y)).normalized()
 			if is_on_floor():
 				SPEED += dash_speed_floor * delta
@@ -303,7 +313,6 @@ func _physics_process(delta: float) -> void:
 			dashing = false
 		if is_on_floor():
 			print("floor dash")
-
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED 

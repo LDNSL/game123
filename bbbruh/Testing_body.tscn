@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://e75mu5ja2p0o"]
+[gd_scene load_steps=14 format=3 uid="uid://e75mu5ja2p0o"]
 
 [ext_resource type="Script" path="res://bbbruh/rework_moevement.gd" id="1_1m68h"]
 [ext_resource type="Texture2D" uid="uid://ur4ruicoajfd" path="res://textures/kenney_prototype-textures/PNG/Green/texture_01.png" id="2_x1unk"]
+[ext_resource type="PackedScene" uid="uid://cg74gcglgxef1" path="res://view_model.tscn" id="3_6gj16"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pyoyd"]
 
@@ -213,12 +214,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.636, 0)
 [node name="eyes" type="Node3D" parent="neck/head"]
 
 [node name="Camera3D" type="Camera3D" parent="neck/head/eyes"]
+cull_mask = 1048573
 current = true
 
 [node name="Sprite3D" type="Sprite3D" parent="neck/head/eyes/Camera3D"]
 transform = Transform3D(0.01, -9.74978e-12, 1.11759e-10, 9.74978e-12, 0.01, 1.11022e-18, -1.11759e-10, -1.00126e-18, 0.01, 0, 0, -0.956492)
 visible = false
 texture = ExtResource("2_x1unk")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="neck/head/eyes/Camera3D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="neck/head/eyes/Camera3D/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="View_model_camera" parent="neck/head/eyes/Camera3D/SubViewportContainer/SubViewport" instance=ExtResource("3_6gj16")]
+cull_mask = 1047554
 
 [node name="camera cnimations" type="AnimationPlayer" parent="neck/head/eyes"]
 libraries = {
