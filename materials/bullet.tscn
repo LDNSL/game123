@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd7tgd7u5x11b"]
+
+[ext_resource type="Script" path="res://materials/bullet.gd" id="1_nw43c"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sytfu"]
+size = Vector3(0.05, 0.05, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r47v6"]
+albedo_color = Color(0.627451, 0.623529, 0, 1)
+emission_enabled = true
+emission = Color(0.450995, 0.551179, 0.201028, 1)
+emission_energy_multiplier = 5.0
+
+[node name="Bullet" type="Node3D"]
+script = ExtResource("1_nw43c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_sytfu")
+surface_material_override/0 = SubResource("StandardMaterial3D_r47v6")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -0.6)
