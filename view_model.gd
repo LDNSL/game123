@@ -34,7 +34,7 @@ func _input(event):
 				if !animation_player.is_playing():
 					animation_player.play("fire")
 					instance = bullet.instantiate()
-					instance.position = barrel__raycast.global_position + Vector3(0, -0.1, 0)
+					instance.position = barrel__raycast.global_position 
 					instance.transform.basis = barrel__raycast.global_transform.basis
 					get_parent().add_child(instance)
 				
