@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://bix6jc70fvb4e"]
+[gd_scene load_steps=23 format=4 uid="uid://bix6jc70fvb4e"]
 
 [ext_resource type="Script" path="res://materials/zombie_ai.gd" id="1_b8gku"]
 [ext_resource type="Texture2D" uid="uid://dhlp4sawdvgjw" path="res://models/untitled_mremireh_body__diffuse.png" id="1_mf81y"]
@@ -2283,13 +2283,15 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d26xi"]
 
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rb1mg"]
+
 [node name="Zombie" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_b8gku")
 
 [node name="Armature" type="Node3D" parent="."]
-transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)
+transform = Transform3D(-0.01, -8.74228e-10, 3.82137e-17, 0, -4.37114e-10, -0.01, 8.74228e-10, -0.01, 4.37114e-10, 0, 0, 0)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="Armature"]
 bones/0/name = "mixamorig_Hips"
@@ -2792,3 +2794,6 @@ shape = SubResource("CapsuleShape3D_d26xi")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_height_offset = 0.15
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_rb1mg")
