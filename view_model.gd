@@ -6,7 +6,7 @@ var shotgun = true
 var shotgun_ammo_max = 7
 var shotgun_ammo = 7
 var shotgun_reload = 2
-@onready var barrel__raycast: RayCast3D = $"fps_rig/shotgun/shotgun_model/Barrel_lowpoly/barrel _raycast"
+@onready var barrel__raycast: RayCast3D = $"barrel _raycast"
 var bullet = load("res://materials/bullet.tscn")
 var instance
 var instance_2

@@ -1180,10 +1180,6 @@ material_override = ExtResource("2_0ga1o")
 mesh = SubResource("ArrayMesh_8egxx")
 skeleton = NodePath("")
 
-[node name="barrel _raycast" type="RayCast3D" parent="fps_rig/shotgun/shotgun_model/Barrel_lowpoly"]
-transform = Transform3D(2.79425e-05, -0.00589423, -0.999982, 0.0164721, 0.999847, -0.00589296, 0.999864, -0.0164717, 0.00012502, 0.441199, 0.198686, -0.00443882)
-target_position = Vector3(0, 0, -1)
-
 [node name="ForendSlider_lowpoly" type="MeshInstance3D" parent="fps_rig/shotgun/shotgun_model"]
 layers = 2
 material_override = ExtResource("2_0ga1o")
@@ -1459,3 +1455,7 @@ surface_material_override/0 = ExtResource("3_jl7o0")
 libraries = {
 "": SubResource("AnimationLibrary_fhxy5")
 }
+
+[node name="barrel _raycast" type="RayCast3D" parent="."]
+transform = Transform3D(0.999934, -0.00540177, -0.0100408, 0.00528936, 0.999923, -0.0111832, 0.0101004, 0.0111293, 0.999885, 0, 0, -0.905291)
+target_position = Vector3(0, 0, -1)

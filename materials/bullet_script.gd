@@ -14,6 +14,12 @@ func _physics_process(delta: float) -> void:
 	velocity = transform.basis * Vector3(0, 0, -SPEED)
 	var collision = move_and_collide(velocity * delta)
 	if collision:
+		velocity = Vector3.ZERO
+		var target = ray_cast_3d.get_collider()
+		if target:
+			if target.is_in_group("enemy"):
+				print("enemy hit")
+				target.hp = 0
 		print("collding")
 		mesh_instance_3d.visible = false
 		gpu_particles_3d.emitting = true 
