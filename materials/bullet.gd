@@ -11,7 +11,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position += transform.basis * Vector3(0, 0, -bullet_speed) * delta
+	velocity = transform.basis * Vector3(0, 0, -bullet_speed) * delta
 	if ray_cast_3d.is_colliding():
 		print("collding")
 		mesh_instance_3d.visible = false

@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dd7tgd7u5x11b"]
+[gd_scene load_steps=8 format=3 uid="uid://dd7tgd7u5x11b"]
 
-[ext_resource type="Script" path="res://materials/bullet.gd" id="1_nw43c"]
+[ext_resource type="Script" path="res://materials/bullet_script.gd" id="1_dhi0n"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_sytfu"]
 size = Vector3(0.05, 0.05, 1)
@@ -10,6 +10,9 @@ albedo_color = Color(0.627451, 0.623529, 0, 1)
 emission_enabled = true
 emission = Color(0.450995, 0.551179, 0.201028, 1)
 emission_energy_multiplier = 5.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kh86m"]
+points = PackedVector3Array(-0.0287037, -0.0287037, -0.503704, 0.0305556, 0.0305556, 0.503704, 0.0305556, -0.0287037, 0.503704, 0.0305556, 0.0305556, -0.503704, -0.0287037, 0.0305556, 0.503704, -0.0287037, -0.0287037, 0.503704, 0.0305556, -0.0287037, -0.503704, -0.0287037, 0.0305556, -0.503704)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yns80"]
 albedo_color = Color(1, 1, 0, 1)
@@ -25,12 +28,16 @@ initial_velocity_max = 8.0
 [sub_resource type="BoxMesh" id="BoxMesh_8f2cm"]
 size = Vector3(0.04, 0.04, 0.04)
 
-[node name="Bullet" type="Node3D"]
-script = ExtResource("1_nw43c")
+[node name="Bullet" type="CharacterBody3D"]
+script = ExtResource("1_dhi0n")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_sytfu")
 surface_material_override/0 = SubResource("StandardMaterial3D_r47v6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00122118, 0.00264403, 0.0024761)
+shape = SubResource("ConvexPolygonShape3D_kh86m")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -0.6)

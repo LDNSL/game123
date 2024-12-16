@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://bqchdi5hikxq0" path="res://bbbruh/test_texture2.tres" id="1_f4rlw"]
 [ext_resource type="PackedScene" uid="uid://e75mu5ja2p0o" path="res://bbbruh/Testing_body.tscn" id="1_qcuqh"]
-[ext_resource type="PackedScene" uid="uid://bix6jc70fvb4e" path="res://materials/zombie.tscn" id="2_ck2y8"]
+[ext_resource type="PackedScene" uid="uid://csrivtkya2jvm" path="res://dummymale.tscn" id="2_hat5l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1dxqq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -34,11 +34,11 @@ environment = SubResource("Environment_j5jal")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
+[node name="dummymale" parent="." instance=ExtResource("2_hat5l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.9265, 2.88197, 0)
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_kip47")
-
-[node name="Zombie" parent="NavigationRegion3D" instance=ExtResource("2_ck2y8")]
-player_path = NodePath("../../CharacterBody3D2")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D"]
 use_collision = true

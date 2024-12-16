@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dwjk3devvqp2q"
-path="res://.godot/imported/untitled.glb-25f87cc78585a91bfd69e199d2a9c82a.scn"
+uid="uid://c5fr4x1ldxnj8"
+path="res://.godot/imported/dummymale.glb-dffc4b26b0022e545d8e4b3b64d42d0e.scn"
 
 [deps]
 
-source_file="res://models/untitled.glb"
-dest_files=["res://.godot/imported/untitled.glb-25f87cc78585a91bfd69e199d2a9c82a.scn"]
+source_file="res://models/video-game-dummy-model-master/dummymale.glb"
+dest_files=["res://.godot/imported/dummymale.glb-dffc4b26b0022e545d8e4b3b64d42d0e.scn"]
 
 [params]
 
@@ -33,7 +33,7 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "animations": {
-"Armature_001|mixamo_com|Layer0": {
+"Alert": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",
@@ -1832,7 +1832,7 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 },
-"Armature_002|mixamo_com|Layer0": {
+"Idle": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",
@@ -3631,7 +3631,7 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": 0
 },
-"Armature|mixamo_com|Layer0": {
+"Stunned": {
 "save_to_file/enabled": true,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",
@@ -5432,7 +5432,7 @@ _subresources={
 }
 },
 "meshes": {
-"untitled_mremireh_body": {
+"dummymale_Cube_010": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
@@ -5440,20 +5440,6 @@ _subresources={
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/path": ""
-},
-"untitled_mremireh_shoe": {
-"generate/lightmap_uv": 0,
-"generate/lods": 0,
-"generate/shadow_meshes": 0,
-"lods/normal_merge_angle": 60.0,
-"lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
-"save_to_file/path": ""
-}
-},
-"nodes": {
-"PATH:Armature/Skeleton3D": {
-"rest_pose/external_animation_library": null
 }
 }
 }

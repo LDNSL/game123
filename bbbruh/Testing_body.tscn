@@ -183,7 +183,7 @@ _data = {
 "wall_run_right": SubResource("Animation_x55ak")
 }
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_1m68h")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -228,6 +228,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="neck/head/eyes/Camera3D/SubViewportContainer"]
 transparent_bg = true
