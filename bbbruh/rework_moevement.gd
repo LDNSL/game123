@@ -113,9 +113,9 @@ func _input(event):
 
 
 func _physics_process(delta: float) -> void:
+	player_camera.fov = 75 * (1+ SPEED/50)
 	#gun_view
 	weapon_camera.global_transform = player_camera.global_transform
-	
 	#decides direction
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	#unlocks camera remove after testing
