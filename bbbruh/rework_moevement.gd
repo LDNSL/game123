@@ -76,7 +76,7 @@ var dash_cooldown = 0
 var dash_velocity_multi = 100
 var dash_vector = Vector2.ZERO
 var dash_direction = Vector3.ZERO
-var dash_speed_air = 25.0
+var dash_speed_air = 400.0
 var dash_speed_floor = 400.0
 var aim_vector = 0
 var dash_cooldown_countdown = 0.1
@@ -275,12 +275,18 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() == true:
 		if SPEED >= 35: # max speed of player
 			SPEED = 35.0
-	if sliding == true:
-		if SPEED >= 25: # max speed of player
-			SPEED = 25.0
+		if sliding == true:
+			if SPEED >= 25: # max speed of player
+				SPEED = 25.0
 	else:
-		if SPEED >= 25: # max air speed of player
-			SPEED = 25.0
+		if dashing:
+			if SPEED >= 35: # max speed of player
+				SPEED = 35.0
+		else:
+			if SPEED >= 25: # max air speed of player
+				SPEED = 25.0
+
+			
 	# Get the input direction and handle the movement/deceleration.
 	if is_on_floor():
 		direction = lerp(direction,(transform.basis * Vector3(input_dir.x,0.0, input_dir.y)).normalized(),delta*lerp_speed)

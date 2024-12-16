@@ -10,7 +10,7 @@ data = PackedVector3Array(-0.2806, 0.0788, 0.0473, -0.1671, -0.0803, 0.1988, -0.
 radius = 10.0
 
 [node name="dummymale" groups=["enemy"] instance=ExtResource("1_cfcxn")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-0.693359, 0, -8.80289e-08, 0, 0.515882, 0, 6.06154e-08, 0, -1.00693, 0, 0, 0)
 script = ExtResource("2_ctwwo")
 
 [node name="Skeleton3D" parent="Armature" index="0"]
