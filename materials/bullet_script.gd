@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var bullet: CharacterBody3D = $"."
 
-const SPEED = 150
+const SPEED = 75
 const JUMP_VELOCITY = 4.5
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 @onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
