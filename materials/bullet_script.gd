@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var bullet: CharacterBody3D = $"."
 
-const SPEED = 300
+const SPEED = 150
 const JUMP_VELOCITY = 4.5
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 @onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
@@ -21,6 +21,7 @@ func _physics_process(delta: float) -> void:
 				print("enemy hit")
 				target.hit()
 		print("collding")
+		collision_shape_3d.disabled = true
 		mesh_instance_3d.visible = false
 		gpu_particles_3d.emitting = true 
 		await get_tree().create_timer(1.0).timeout
