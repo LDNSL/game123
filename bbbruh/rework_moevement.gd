@@ -89,8 +89,9 @@ var slide_vector = Vector2.ZERO
 var slide_speed = 17
 
 #wall running
-var wall_running_vector = Vector2.ZERO
+var wall_running_vector = Vector3.ZERO
 var wall_running_speed = Vector3.ZERO
+var wall_run_direction = Vector3.ZERO
 	
 
 #handles camera
@@ -240,13 +241,13 @@ func _physics_process(delta: float) -> void:
 				if wall_run_check_right.is_colliding() == true:
 					camera_cnimations.play("wall_run_right")
 					wall_running = true
-					wall_running_vector = input_dir
+					wall_running_vector = Vector3(input_dir.x,0.0,input_dir.y)
 					velocity.y = 0
 					SPEED = abs(last_velocity.x) + abs(last_velocity.z)
 				elif wall_run_check_left.is_colliding() == true:
 					camera_cnimations.play("wall_run_left")
 					wall_running = true
-					wall_running_vector = input_dir
+					wall_running_vector = Vector3(input_dir.x,0.0,input_dir.y)
 					velocity.y = 0
 					SPEED = abs(last_velocity.x) + abs(last_velocity.z)
 			elif doublejump_cooldown == false and is_on_floor() == false and wall_running == false:
@@ -300,7 +301,10 @@ func _physics_process(delta: float) -> void:
 				direction = (transform.basis * Vector3(0,0.0,-1)).normalized() 
 			velocity.z = direction.z * (slide_timer + 0.1) * SPEED * 100
 	if wall_running:
-		direction = (transform.basis * Vector3(0,0.0,-1)).normalized() #place holder
+		if !wall_running_vector.z == 0:
+			direction = (transform.basis * Vector3(0,0.0,wall_running_vector.z)).normalized() #place holder
+		else:	
+			direction = (transform.basis * Vector3(0,0.0,-1)).normalized()
 		dashing = false
 	if dashing:
 		if dash_cooldown >= 2.5:

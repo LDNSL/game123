@@ -1,5 +1,5 @@
 extends Node3D
-const bullet_speed = 40.0
+const bullet_speed = 5.0
 @onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 @onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D

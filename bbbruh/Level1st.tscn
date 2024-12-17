@@ -91,4 +91,4 @@ size = Vector3(41.4318, 8.37408, 0.849487)
 material = ExtResource("1_f4rlw")
 
 [node name="dummymale" parent="." instance=ExtResource("2_hat5l")]
-transform = Transform3D(-0.693359, 0, -8.80289e-08, 0, 0.515882, 0, 6.06154e-08, 0, -1.00693, 26.8731, 1.66288, -2.30374)
+transform = Transform3D(-0.693359, 0, -8.80289e-08, 0, 0.515882, 0, 6.06154e-08, 0, -1.00693, 21.1547, 1.90618, -6.24091)

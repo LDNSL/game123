@@ -17,6 +17,7 @@ config/icon="res://stuff idrk/icon.svg"
 [global_group]
 
 player=""
+enemy=""
 
 [input]
 

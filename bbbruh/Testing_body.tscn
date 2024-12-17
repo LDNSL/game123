@@ -7,9 +7,9 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pyoyd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g3g45"]
+height = 1.35539
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x2du4"]
-height = 1.2
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ndwgy"]
 
 [sub_resource type="Animation" id="Animation_f2axi"]
 length = 0.001
@@ -193,8 +193,8 @@ mesh = SubResource("CapsuleMesh_pyoyd")
 shape = SubResource("CapsuleShape3D_g3g45")
 
 [node name="crouching col" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.387023, 0)
-shape = SubResource("CapsuleShape3D_x2du4")
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, -0.508851, 0)
+shape = SubResource("CapsuleShape3D_ndwgy")
 
 [node name="Crouch_check" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -207,7 +207,7 @@ target_position = Vector3(-1.5, 0, 0)
 target_position = Vector3(1.5, 0, 0)
 
 [node name="neck" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.636, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.636, -0.287483)
 
 [node name="head" type="Node3D" parent="neck"]
 

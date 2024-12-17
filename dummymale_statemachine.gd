@@ -29,8 +29,7 @@ func _process(delta: float) -> void:
 		queue_free()
 	if ray_cast_3d.is_colliding():
 		state = ALERT
-	elif Input.is_action_pressed("shoot"):
-		state = STUN
+
 	
 	
 	
@@ -64,3 +63,10 @@ func _on_timer_timeout() -> void:
 		var hit = ray_cast_3d.get_collider()
 		if hit.is_in_group("player"):
 			print("hit")
+
+
+func _on_area_3d_body_part_hit(dam: Variant) -> void:
+	hp -= dam
+	print("hit")
+	if hp <= 0:
+		queue_free()
