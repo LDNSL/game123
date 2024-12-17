@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 			ap.play("Idle")
 		ALERT:
 			ap.play("Alert")
-			eyes.look_at(target.global_transform.origin, Vector3.UP)
+			# eyes.look_at(target.global_transform.origin, Vector3.UP)
 			rotate_y(-deg_to_rad(eyes.rotation.y * turning_speed) * delta)
 		STUN:
 			ap.play("Stunned")

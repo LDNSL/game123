@@ -40,12 +40,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00122118, 0.00264403, 0.002
 shape = SubResource("ConvexPolygonShape3D_kh86m")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0819497)
-target_position = Vector3(0, 0, -0.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.484753)
+target_position = Vector3(0, 0, -1.5)
 collide_with_areas = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00010699, -0.000480279, -0.595611)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00010699, -0.000480279, 0.515185)
 material_override = SubResource("StandardMaterial3D_yns80")
 emitting = false
 one_shot = true

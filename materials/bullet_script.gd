@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var bullet: CharacterBody3D = $"."
 
-const SPEED = 75
+const SPEED = 100
 const JUMP_VELOCITY = 4.5
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 @onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
@@ -11,8 +11,8 @@ const JUMP_VELOCITY = 4.5
 
 
 func _physics_process(delta: float) -> void:
-	velocity = transform.basis * Vector3(0, 0, -SPEED)
-	 
+	var velocitya = transform.basis * Vector3(0, 0, -SPEED)
+	position += velocitya * delta
 	if ray_cast_3d.is_colliding():
 		velocity = Vector3.ZERO
 		var target = ray_cast_3d.get_collider()
@@ -26,4 +26,3 @@ func _physics_process(delta: float) -> void:
 		gpu_particles_3d.emitting = true 
 		await get_tree().create_timer(1.0).timeout
 		queue_free()
-	move_and_collide(velocity * delta)
