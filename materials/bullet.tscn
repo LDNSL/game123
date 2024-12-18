@@ -29,6 +29,9 @@ initial_velocity_max = 8.0
 size = Vector3(0.04, 0.04, 0.04)
 
 [node name="Bullet" type="CharacterBody3D"]
+physics_interpolation_mode = 1
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_dhi0n")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -38,6 +41,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_r47v6")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00122118, 0.00264403, 0.0024761)
 shape = SubResource("ConvexPolygonShape3D_kh86m")
+disabled = true
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.484753)
@@ -45,7 +49,7 @@ target_position = Vector3(0, 0, -1.5)
 collide_with_areas = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00010699, -0.000480279, 0.515185)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00010699, -0.000480279, -0.465834)
 material_override = SubResource("StandardMaterial3D_yns80")
 emitting = false
 one_shot = true

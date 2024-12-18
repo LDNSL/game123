@@ -73,6 +73,8 @@ bone_name = "Head"
 bone_idx = 10
 
 [node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/Headbone" index="0" groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("3_l0nga")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/Headbone/Area3D" index="0"]
@@ -85,6 +87,8 @@ bone_name = "Spine.001"
 bone_idx = 3
 
 [node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/spine bone" index="0" groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("3_l0nga")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/spine bone/Area3D" index="0"]
@@ -97,6 +101,8 @@ bone_name = "Spine"
 bone_idx = 2
 
 [node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/pelvis" index="0" groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("3_l0nga")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/pelvis/Area3D" index="0"]
@@ -104,11 +110,13 @@ transform = Transform3D(0.681606, 0, 0, 0, 0.156992, -0.0829748, 0, 0.0263166, 0
 shape = SubResource("CylinderShape3D_t555e")
 
 [node name="leg_left" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.0213845, 0.0441122, 0.998798, -0.0943955, -0.994652, 0.0419082, 0.995305, -0.0933858, 0.0254342, 0.207246, 0.0415722, 0.0895028)
+transform = Transform3D(-0.0213844, 0.0441123, 0.998798, -0.0943955, -0.994652, 0.0419082, 0.995305, -0.0933859, 0.0254341, 0.207246, 0.0415722, 0.0895028)
 bone_name = "Thigh.L"
 bone_idx = 17
 
 [node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/leg_left" index="0" groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("3_l0nga")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/leg_left/Area3D" index="0"]
@@ -116,11 +124,13 @@ transform = Transform3D(0.181303, -0.0133493, -0.48364, -0.00095951, 0.516255, -
 shape = SubResource("CapsuleShape3D_ywm05")
 
 [node name="right leg" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
-transform = Transform3D(-0.021385, -0.0441108, -0.998798, 0.0943933, -0.994653, 0.0419067, -0.995305, -0.0933837, 0.0254345, -0.207246, 0.0415722, 0.0895029)
+transform = Transform3D(-0.0213848, -0.04411, -0.998798, 0.0943934, -0.994653, 0.0419059, -0.995305, -0.0933838, 0.0254343, -0.207246, 0.0415722, 0.0895029)
 bone_name = "Thigh.R"
 bone_idx = 20
 
 [node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/right leg" index="0" groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("3_l0nga")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/right leg/Area3D" index="0"]
@@ -128,11 +138,13 @@ transform = Transform3D(0.641693, -0.00756777, 0.169065, 0.0170545, 0.516104, -0
 shape = SubResource("CapsuleShape3D_1dklv")
 
 [node name="right arm upper" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.983453, -0.154744, 0.0942031, 0.181163, -0.840039, 0.511385, 6.94068e-07, 0.519989, 0.854173, -0.545953, 0.609223, -0.136102)
+transform = Transform3D(-0.983453, -0.154744, 0.0942031, 0.181163, -0.840039, 0.511385, 5.92903e-07, 0.519989, 0.854173, -0.545953, 0.609223, -0.136102)
 bone_name = "Forearm.R"
 bone_idx = 7
 
 [node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/right arm upper" index="0" groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("3_l0nga")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/right arm upper/Area3D" index="0"]
@@ -140,11 +152,13 @@ transform = Transform3D(0.679745, 0.0349253, 0.0148726, -0.0477616, 0.382382, 0.
 shape = SubResource("CapsuleShape3D_allea")
 
 [node name="left arm upper" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="6"]
-transform = Transform3D(-0.983453, 0.154744, -0.0942031, -0.181163, -0.840039, 0.511385, -6.94068e-07, 0.519989, 0.854173, 0.545953, 0.609223, -0.136102)
+transform = Transform3D(-0.983453, 0.154744, -0.0942031, -0.181163, -0.840039, 0.511385, -5.92903e-07, 0.519989, 0.854173, 0.545953, 0.609223, -0.136102)
 bone_name = "Forearm.L"
 bone_idx = 13
 
 [node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/left arm upper" index="0" groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("3_l0nga")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/left arm upper/Area3D" index="0"]
