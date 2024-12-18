@@ -36,6 +36,9 @@ var dashing = false
 
 # var related to camera
 @onready var weapon_camera = $neck/head/eyes/Camera3D/SubViewportContainer/SubViewport/View_model_camera
+@onready var crosshair_cam: TextureRect = $neck/head/eyes/Camera3D/SubViewportContainer/TextureRect
+
+
 @onready var eyes = $neck/head/eyes
 @onready var head = $neck/head
 @onready var player_camera = $neck/head/eyes/Camera3D
@@ -117,6 +120,7 @@ func _physics_process(delta: float) -> void:
 	player_camera.fov = 75 * (1+ SPEED/50)
 	#gun_view
 	weapon_camera.global_transform = player_camera.global_transform
+	
 	#decides direction
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	#unlocks camera remove after testing

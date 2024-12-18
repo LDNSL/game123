@@ -11,6 +11,7 @@ var bullet = load("res://materials/bullet.tscn")
 var instance
 var instance_2
 var instance_3
+@onready var ray_cast_3d: RayCast3D = $"../../../RayCast3D"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -34,8 +35,8 @@ func _input(event):
 				if !animation_player.is_playing():
 					animation_player.play("fire")
 					instance = bullet.instantiate()
-					instance.position = barrel__raycast.global_position 
-					instance.transform.basis = barrel__raycast.global_transform.basis
+					instance.position = ray_cast_3d.global_position 
+					instance.transform.basis = ray_cast_3d.global_transform.basis
 					get_parent().add_child(instance)
 				
 			if event.is_action_pressed("reload"):

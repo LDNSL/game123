@@ -1,8 +1,10 @@
-[gd_scene load_steps=75 format=4 uid="uid://cg74gcglgxef1"]
+[gd_scene load_steps=77 format=4 uid="uid://cg74gcglgxef1"]
 
-[ext_resource type="Script" path="res://view_model.gd" id="1_6hfq3"]
+[ext_resource type="Script" path="res://hit scan.gd" id="1_hiuck"]
 [ext_resource type="Material" uid="uid://da7ly3ig6sntf" path="res://materials/shotgun_mat.tres" id="2_0ga1o"]
 [ext_resource type="Material" uid="uid://cbrnd76j4iyyr" path="res://materials/hands_mat.tres" id="3_jl7o0"]
+[ext_resource type="Texture2D" uid="uid://cldcvkv5ahmd8" path="res://textures/kenney_crosshair-pack/PNG/White/crosshair161.png" id="4_12ogm"]
+[ext_resource type="Texture2D" uid="uid://xxg62gks4adi" path="res://textures/kenney_crosshair-pack/PNG/White/crosshair162.png" id="5_txx37"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2rro"]
 resource_name = "ShotgunMaterial"
@@ -1152,7 +1154,7 @@ _data = {
 
 [node name="View_model_camera" type="Camera3D"]
 fov = 35.0
-script = ExtResource("1_6hfq3")
+script = ExtResource("1_hiuck")
 
 [node name="fps_rig" type="Node3D" parent="."]
 
@@ -1457,5 +1459,33 @@ libraries = {
 }
 
 [node name="barrel _raycast" type="RayCast3D" parent="."]
-transform = Transform3D(0.999934, -0.00540177, -0.0100408, 0.00528936, 0.999923, -0.0111832, 0.0101004, 0.0111293, 0.999885, 0.190287, -0.0672159, 0.144091)
+transform = Transform3D(0.999934, -0.00540177, -0.0100408, 0.00528936, 0.999923, -0.0111832, 0.0101004, 0.0111293, 0.999885, 0.188475, -0.0672159, -0.697257)
 target_position = Vector3(0, 0, -0.1)
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="normal cross" type="TextureRect" parent="SubViewportContainer2/SubViewport"]
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("4_12ogm")
+
+[node name="hit cross hair" type="TextureRect" parent="SubViewportContainer2/SubViewport"]
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("5_txx37")
