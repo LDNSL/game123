@@ -11,6 +11,7 @@ var bullet = load("res://materials/bullet.tscn")
 var instance
 var instance_2
 var instance_3
+var shotgun_damage = 3
 @onready var ray_cast_3d: RayCast3D = $"../../../RayCast3D"
 @onready var shoot_position: RayCast3D = $"../../../shoot_position"
 @onready var crosshair: TextureRect = $"SubViewportContainer2/SubViewport/normal cross"
@@ -53,11 +54,12 @@ func _input(event):
 			animation_player.play("Pull_DOWN")
 		
 func shoot():
+	var damage = shotgun_damage
 	if !animation_player.is_playing():
 		animation_player.play("fire")
 		if shoot_position.is_colliding():
 			if shoot_position.get_collider().is_in_group("enemy"):
-				shoot_position.get_collider().hit()
+				shoot_position.get_collider().hit(damage)
 		
 func inspect():
 	animation_player.play("inspect")
