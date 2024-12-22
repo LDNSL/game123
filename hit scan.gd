@@ -38,7 +38,7 @@ func sway(sway_amount):
 	fps_rig.position.y += sway_amount.y * 0.00005
 	
 func _input(event):
-	if event.is_action_pressed("right click"):
+	if event.is_action_pressed("shoot"):
 		print("shoot")
 		shoot()
 	if event.is_action_pressed("inspect"):
@@ -55,15 +55,19 @@ func _input(event):
 		
 func shoot():
 	var damage = shotgun_damage
-	if !animation_player.is_playing():
+	if !animation_player.is_playing() or shotgun_in_use == true:
 		animation_player.play("fire")
 		if shoot_position.is_colliding():
 			if shoot_position.get_collider().is_in_group("enemy"):
 				shoot_position.get_collider().hit(damage)
 		
 func inspect():
-	animation_player.play("inspect")
+	if shotgun_in_use == true:
+		animation_player.play("reset")
+		animation_player.play("inspect")
 
 func reload():
-	animation_player.play("reload")
+	if !animation_player.is_playing() or shotgun_in_use == true:
+		animation_player.play("reset")
+		animation_player.play("reload")
 	

@@ -30,6 +30,8 @@ func _on_timer_timeout() -> void:
 		var hit = ray_cast_3d.get_collider()
 		if hit.is_in_group("player"):
 			print("hit")
+func stun():
+	print("stun")
 
 
 func _on_area_3d_body_part_hit(dam: Variant) -> void:

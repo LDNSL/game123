@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://e75mu5ja2p0o"]
+[gd_scene load_steps=16 format=3 uid="uid://e75mu5ja2p0o"]
 
 [ext_resource type="Script" path="res://bbbruh/rework_moevement.gd" id="1_1m68h"]
+[ext_resource type="Script" path="res://bbbruh/enemystep.gd" id="2_eu2u2"]
 [ext_resource type="Texture2D" uid="uid://ur4ruicoajfd" path="res://textures/kenney_prototype-textures/PNG/Green/texture_01.png" id="2_x1unk"]
 [ext_resource type="PackedScene" uid="uid://cg74gcglgxef1" path="res://bbbruh/view_model.tscn" id="3_6gj16"]
 
@@ -10,6 +11,8 @@
 height = 1.35539
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ndwgy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0h40h"]
 
 [sub_resource type="Animation" id="Animation_f2axi"]
 length = 0.001
@@ -208,6 +211,14 @@ target_position = Vector3(-1.5, 0, 0)
 [node name="Wall_run_check_right" type="RayCast3D" parent="."]
 target_position = Vector3(1.5, 0, 0)
 
+[node name="Area3D" type="Area3D" parent="."]
+monitorable = false
+script = ExtResource("2_eu2u2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01352, 0)
+shape = SubResource("BoxShape3D_0h40h")
+
 [node name="neck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.636, -0.287483)
 
@@ -248,3 +259,8 @@ collision_mask = 3
 libraries = {
 "": SubResource("AnimationLibrary_xm8kt")
 }
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

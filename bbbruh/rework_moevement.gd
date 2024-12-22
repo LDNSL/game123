@@ -26,8 +26,8 @@ var dashing = false
 #animations
 @onready var camera_cnimations = $"neck/head/eyes/camera cnimations"
 
-
-
+# enemystep
+var enemy_step_amount = 0
 #Collosion shapes
 @onready var standing_collision = $"Standing col"
 @onready var crouching_collision = $"crouching col"
@@ -35,6 +35,7 @@ var dashing = false
 
 
 # var related to camera
+@onready var view_model_camera = $"."
 @onready var weapon_camera = $neck/head/eyes/Camera3D/SubViewportContainer/SubViewport/View_model_camera
 @onready var crosshair_cam: TextureRect = $neck/head/eyes/Camera3D/SubViewportContainer/TextureRect
 
@@ -241,6 +242,8 @@ func _physics_process(delta: float) -> void:
 			if is_on_floor():
 				velocity.y = JUMP_VELOCITY
 				camera_cnimations.play("jumping_animation")
+			elif enemy_step_amount > 1:
+				enemystep()
 			elif wall_run_check_right.is_colliding() == true or wall_run_check_left.is_colliding() == true and Input.is_action_pressed("jump"): # wall run start
 				if wall_run_check_right.is_colliding() == true:
 					camera_cnimations.play("wall_run_right")
@@ -334,4 +337,20 @@ func _physics_process(delta: float) -> void:
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 	last_velocity = velocity
 	move_and_slide()
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	enemy_step_amount -= 1
+	pass # Replace with function body.
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	enemy_step_amount += 1
+	pass # Replace with function body.
+@onready var area_3d: Area3D = $Area3D
+func enemystep():
+	velocity.y = JUMP_VELOCITY
+	var list= area_3d.get_overlapping_bodies()
+	for i in list:
+		if i.is_in_group("enemy"):
+			i.stun()
 	

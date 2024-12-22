@@ -48,4 +48,5 @@ func _input(event):
 				animation_player.play("Pull_up")
 			else:
 				animation_player.play("Pull_DOWN")
-		
+func jumpstep_stun():
+	print("jumpstun")		
