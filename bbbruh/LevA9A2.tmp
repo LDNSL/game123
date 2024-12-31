@@ -94,6 +94,3 @@ material = ExtResource("1_f4rlw")
 
 [node name="Node3D" parent="." instance=ExtResource("4_vpyky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.22613, 2.46418, 3.28092)
-
-[node name="Node3D2" parent="." instance=ExtResource("4_vpyky")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3344, 2.46418, -2.71134)

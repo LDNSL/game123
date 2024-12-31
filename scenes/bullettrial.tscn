@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://25775lt3jqbh"]
+
+[ext_resource type="Script" path="res://scenes/bullettrial.gd" id="1_q70m5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1sms"]
+transparency = 1
+albedo_color = Color(0.687625, 0.632529, 0.179335, 1)
+emission_enabled = true
+emission = Color(0.67381, 0.66088, 0.319711, 1)
+emission_energy_multiplier = 4.0
+
+[node name="bullettrial" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_h1sms")
+cast_shadow = 0
+script = ExtResource("1_q70m5")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -9,7 +9,7 @@ var sprint_speed = 17.0
 var JUMP_VELOCITY = 6.0
 var gravity = 9.8
 var last_velocity = Vector3.ZERO
-var anchor_fall_value = gravity
+var anchor_fall_value = 100
 var extra_velocity = Vector3.ZERO
 
 #states
@@ -118,6 +118,22 @@ func _input(event):
 
 
 func _physics_process(delta: float) -> void:
+	# Add the gravity.
+	if not is_on_floor() and wall_running == false or dashing == true :
+		velocity.y += -gravity * delta
+		falling = true
+		if anchor_fall == true:
+			velocity.x = 0.0
+			velocity.z = 0.0
+			velocity.y += -anchor_fall_value * delta
+			if area_3d.get_overlapping_bodies():
+				var enemy_slam_list = area_3d.get_overlapping_bodies()
+				enemyslam(enemy_slam_list)
+				
+	else:
+		if is_on_floor():
+			doublejump_cooldown = false
+			falling = false
 	player_camera.fov = 75 * (1+ SPEED/50)
 	#gun_view
 	weapon_camera.global_transform = player_camera.global_transform
@@ -138,14 +154,14 @@ func _physics_process(delta: float) -> void:
 		anchor_fall = true
 	else:
 		anchor_fall = false
-	if Input.is_action_pressed("crouch") and sliding == false:
+	if Input.is_action_pressed("crouch") and sliding == false and is_on_floor():
 		SPEED = lerp(SPEED,crouch_speed,delta*lerp_speed)
 		head.position.y = lerp(head.position.y,crouching_depth,delta*lerp_speed)
 		standing_collision.disabled = true
 		crouching_collision.disabled = false
 
 		#start of slide
-		if sprinting and input_dir != Vector2.ZERO and is_on_floor() or Input.is_action_just_pressed("crouch") and is_on_floor() == false:
+		if sprinting and input_dir != Vector2.ZERO and is_on_floor():
 			sliding = true
 			slide_vector = input_dir
 			free_looking = true
@@ -222,17 +238,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		eyes.position.y = lerp(eyes.position.y,head_bobbing_vector.y*0.0,delta*lerp_speed)
 		eyes.position.x = lerp(eyes.position.x,head_bobbing_vector.x*0.0,delta*lerp_speed)		
-
-	# Add the gravity.
-	if not is_on_floor() and wall_running == false or dashing == true :
-		velocity.y += -gravity * delta
-		falling = true
-		if anchor_fall == true:
-			velocity.y += -anchor_fall_value * delta
-	else:
-		if is_on_floor():
-			doublejump_cooldown = false
-			falling = false
 
 	# Handle jump.
 	if !crouching_raycast.is_colliding() == true:
@@ -332,7 +337,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED 
 	else:
-		if dashing == false:
+		if dashing == false or anchor_fall == true:
 			velocity.x = move_toward(velocity.x, 0, SPEED) 
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 	last_velocity = velocity
@@ -353,4 +358,10 @@ func enemystep():
 	for i in list:
 		if i.is_in_group("enemy"):
 			i.stun()
-	
+
+func enemyslam(list):
+	var damage = 3
+	for i in list:
+		if i.is_in_group("enemy"):
+			i.hit(damage)
+		

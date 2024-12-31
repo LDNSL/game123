@@ -255,6 +255,9 @@ cull_mask = 1047554
 target_position = Vector3(0, 0, -100)
 collision_mask = 3
 
+[node name="endpoint" type="Node3D" parent="neck/head/eyes/Camera3D/shoot_position"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
+
 [node name="camera cnimations" type="AnimationPlayer" parent="neck/head/eyes"]
 libraries = {
 "": SubResource("AnimationLibrary_xm8kt")
