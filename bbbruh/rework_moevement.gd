@@ -155,7 +155,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		anchor_fall = false
 	if Input.is_action_pressed("crouch") and sliding == false and is_on_floor():
-		SPEED = lerp(SPEED,crouch_speed,delta*lerp_speed)
 		head.position.y = lerp(head.position.y,crouching_depth,delta*lerp_speed)
 		standing_collision.disabled = true
 		crouching_collision.disabled = false
@@ -167,6 +166,8 @@ func _physics_process(delta: float) -> void:
 			free_looking = true
 			slide_timer = slide_timer_max
 			SPEED = abs(last_velocity.x) + abs(last_velocity.z)
+		else:
+			SPEED = lerp(SPEED,crouch_speed,delta*lerp_speed)
 		walking = false
 		sprinting = false
 		crouching = false
@@ -177,12 +178,12 @@ func _physics_process(delta: float) -> void:
 		head.position.y = lerp(head.position.y,0.0,delta*lerp_speed)
 		#sprint
 		if sliding == false:
-			if Input.is_action_pressed("sprint") and is_on_floor():
+			if Input.is_action_pressed("sprint"):
 				SPEED =  lerp(SPEED,sprint_speed,delta*lerp_speed)
 				walking = false
 				sprinting = true
 				crouching = false
-			elif Input.is_action_just_released("sprint") or is_on_floor():
+			elif Input.is_action_just_released("sprint"):
 				SPEED =  lerp(SPEED,walk_speed,delta*lerp_speed)
 				walking = true
 				sprinting = false

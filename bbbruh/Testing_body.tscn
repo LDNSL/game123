@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://e75mu5ja2p0o"]
+[gd_scene load_steps=17 format=3 uid="uid://e75mu5ja2p0o"]
 
 [ext_resource type="Script" path="res://bbbruh/rework_moevement.gd" id="1_1m68h"]
 [ext_resource type="Script" path="res://bbbruh/enemystep.gd" id="2_eu2u2"]
 [ext_resource type="Texture2D" uid="uid://ur4ruicoajfd" path="res://textures/kenney_prototype-textures/PNG/Green/texture_01.png" id="2_x1unk"]
 [ext_resource type="PackedScene" uid="uid://cg74gcglgxef1" path="res://bbbruh/view_model.tscn" id="3_6gj16"]
+[ext_resource type="AudioStream" uid="uid://dnmv1kclfulmo" path="res://audio/パン野実々美 - Take You Higher (Prod. KOTONOHOUSE).mp3" id="5_klu6u"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pyoyd"]
 
@@ -262,6 +263,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
 libraries = {
 "": SubResource("AnimationLibrary_xm8kt")
 }
+
+[node name="MUSIC" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_klu6u")
+autoplay = true
+stream_paused = true
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
