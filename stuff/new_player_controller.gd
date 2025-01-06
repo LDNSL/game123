@@ -180,7 +180,7 @@ func _physics_process(delta: float) -> void:
 				walking = false
 				sprinting = true
 				crouching = false
-			elif Input.is_action_just_released("sprint"):
+			else: 
 				SPEED =  lerp(SPEED,walk_speed,delta*lerp_speed)
 				walking = true
 				sprinting = false

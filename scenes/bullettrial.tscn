@@ -10,7 +10,6 @@ emission = Color(0.67381, 0.66088, 0.319711, 1)
 emission_energy_multiplier = 4.0
 
 [node name="bullettrial" type="MeshInstance3D"]
-layers = 2
 material_override = SubResource("StandardMaterial3D_h1sms")
 cast_shadow = 0
 script = ExtResource("1_q70m5")

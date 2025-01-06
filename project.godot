@@ -109,5 +109,4 @@ inspect={
 
 [physics]
 
-common/physics_ticks_per_second=180
 common/physics_interpolation=true
