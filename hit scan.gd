@@ -17,6 +17,7 @@ var shotgun_damage = 3
 @onready var shoot_position: RayCast3D = $"../../../shoot_position"
 @onready var crosshair: TextureRect = $"SubViewportContainer2/SubViewport/normal cross"
 @onready var hit_cross_hair: TextureRect = $"SubViewportContainer2/SubViewport/hit cross hair"
+@onready var gun_sounds: AudioStreamPlayer3D = $"fps_rig/shotgun/shotgun_model/gun sounds"
 
 enum weapons {
 	SHOTGUN,
@@ -65,26 +66,27 @@ func _input(event):
 			animation_player.play("equip_animation")
 		else:
 			animation_player.play_backwards("equip_animation")
-@onready var character_body_3d: CharacterBody3D = $"../../../../../../.."		
+@onready var character_body_3d: CharacterBody3D = 	$"../../../../../../.."
 func shoot():
 	var damage = 0	
 	if !animation_player.is_playing() or can_shoot == true:
 		match weapon:
 			weapons.SHOTGUN:
+				gun_sounds.play()
 				damage = 3
 				animation_player.play("shoot")
 				can_shoot = false
 		instance = bullet_trial.instantiate()
 		if shoot_position.is_colliding():
-			instance.init(gun_bar.global_position, shoot_position.get_collision_point())
+			#instance.init(gun_bar.global_position, shoot_position.get_collision_point())
 			if shoot_position.get_collider().is_in_group("enemy"):
 				shoot_position.get_collider().hit(damage)
 				print("fire")
 				_hitmarker()
 		else:
 			print(aim_ray_end.global_position)
-			instance.init(gun_bar.global_position, aim_ray_end.global_position)
-		character_body_3d.get_parent().add_child(instance)
+			#instance.init(gun_bar.global_position, aim_ray_end.global_position)
+		#character_body_3d.get_parent().add_child(instance)
 
 		
 func inspect():

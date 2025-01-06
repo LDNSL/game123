@@ -1,9 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://e75mu5ja2p0o"]
+[gd_scene load_steps=18 format=3 uid="uid://e75mu5ja2p0o"]
 
 [ext_resource type="Script" path="res://bbbruh/rework_moevement.gd" id="1_1m68h"]
 [ext_resource type="Script" path="res://bbbruh/enemystep.gd" id="2_eu2u2"]
-[ext_resource type="Texture2D" uid="uid://ur4ruicoajfd" path="res://textures/kenney_prototype-textures/PNG/Green/texture_01.png" id="2_x1unk"]
 [ext_resource type="PackedScene" uid="uid://cg74gcglgxef1" path="res://bbbruh/view_model.tscn" id="3_6gj16"]
+[ext_resource type="AudioStream" uid="uid://c4posvlprmd1e" path="res://audio/BGM for game (PLACEHOLDER).wav" id="4_eoosl"]
 [ext_resource type="AudioStream" uid="uid://dnmv1kclfulmo" path="res://audio/パン野実々美 - Take You Higher (Prod. KOTONOHOUSE).mp3" id="5_klu6u"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pyoyd"]
@@ -187,6 +187,12 @@ _data = {
 "wall_run_right": SubResource("Animation_x55ak")
 }
 
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_lu48c"]
+shuffle = true
+stream_count = 2
+stream_0 = ExtResource("4_eoosl")
+stream_1 = ExtResource("5_klu6u")
+
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
 collision_layer = 3
 collision_mask = 3
@@ -228,13 +234,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.636, -0.287483)
 [node name="eyes" type="Node3D" parent="neck/head"]
 
 [node name="Camera3D" type="Camera3D" parent="neck/head/eyes"]
-cull_mask = 1048573
+physics_interpolation_mode = 2
 current = true
 
-[node name="Sprite3D" type="Sprite3D" parent="neck/head/eyes/Camera3D"]
-transform = Transform3D(0.01, -9.74978e-12, 1.11759e-10, 9.74978e-12, 0.01, 1.11022e-18, -1.11759e-10, -1.00126e-18, 0.01, 0, 0, -0.956492)
-visible = false
-texture = ExtResource("2_x1unk")
+[node name="shoot_position" type="RayCast3D" parent="neck/head/eyes/Camera3D"]
+target_position = Vector3(0, 0, -100)
+collision_mask = 3
+
+[node name="endpoint" type="Node3D" parent="neck/head/eyes/Camera3D/shoot_position"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="neck/head/eyes/Camera3D"]
 anchors_preset = 15
@@ -245,19 +253,14 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="neck/head/eyes/Camera3D/SubViewportContainer"]
+physics_interpolation_mode = 2
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 4
 
 [node name="View_model_camera" parent="neck/head/eyes/Camera3D/SubViewportContainer/SubViewport" instance=ExtResource("3_6gj16")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60642, 0)
 cull_mask = 1047554
-
-[node name="shoot_position" type="RayCast3D" parent="neck/head/eyes/Camera3D"]
-target_position = Vector3(0, 0, -100)
-collision_mask = 3
-
-[node name="endpoint" type="Node3D" parent="neck/head/eyes/Camera3D/shoot_position"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100)
 
 [node name="camera cnimations" type="AnimationPlayer" parent="neck/head/eyes"]
 libraries = {
@@ -265,9 +268,8 @@ libraries = {
 }
 
 [node name="MUSIC" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("5_klu6u")
+stream = SubResource("AudioStreamPlaylist_lu48c")
 autoplay = true
-stream_paused = true
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

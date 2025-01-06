@@ -26,9 +26,6 @@ agent_radius = 0.4
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_28njf")
 
-[node name="CharacterBody3D2" parent="." instance=ExtResource("1_qcuqh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07633, 3.96964, 0)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_j5jal")
 
@@ -97,3 +94,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.22613, 2.46418, 3.28092)
 
 [node name="Node3D2" parent="." instance=ExtResource("4_vpyky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3344, 2.46418, -2.71134)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_qcuqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.98597, 0)
+metadata/_edit_lock_ = true
