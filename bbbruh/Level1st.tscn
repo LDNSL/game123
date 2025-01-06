@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://bbbruh/level_1_st.gd" id="1_28njf"]
 [ext_resource type="Material" uid="uid://bqchdi5hikxq0" path="res://bbbruh/test_texture2.tres" id="1_f4rlw"]
-[ext_resource type="PackedScene" uid="uid://e75mu5ja2p0o" path="res://bbbruh/Testing_body.tscn" id="1_qcuqh"]
+[ext_resource type="PackedScene" uid="uid://7k548s5lh80y" path="res://stuff/new_player_controller.tscn" id="4_ggao4"]
 [ext_resource type="PackedScene" uid="uid://crlpmtw2pn1n0" path="res://testdummy.tscn" id="4_vpyky"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1dxqq"]
@@ -95,6 +95,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.22613, 2.46418, 3.28092)
 [node name="Node3D2" parent="." instance=ExtResource("4_vpyky")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3344, 2.46418, -2.71134)
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_qcuqh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.98597, 0)
-metadata/_edit_lock_ = true
+[node name="CharacterBody3D" parent="." instance=ExtResource("4_ggao4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7212, 8.94014, 0)
