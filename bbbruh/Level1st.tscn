@@ -24,6 +24,7 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 agent_radius = 0.4
 
 [node name="Node3D" type="Node3D"]
+physics_interpolation_mode = 2
 script = ExtResource("1_28njf")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

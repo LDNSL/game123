@@ -7,6 +7,7 @@ func _ready() -> void:
 	material_override = duplicate_overide
 
 func init(pos1, pos2):
+	var muzzle = pos1
 	var draw_mesh = ImmediateMesh.new()
 	mesh = draw_mesh
 	draw_mesh.surface_begin(Mesh.PRIMITIVE_LINES, material_override)
@@ -16,6 +17,7 @@ func init(pos1, pos2):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	bullet_alpha -= delta* 3.5
 	material_override.albedo_color.a = bullet_alpha
 

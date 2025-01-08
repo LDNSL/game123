@@ -6,7 +6,7 @@ var SPEED = 10.0
 var crouch_speed = 6.0
 var walk_speed = 10.0
 var sprint_speed = 17.0
-var JUMP_VELOCITY = 6.0
+var JUMP_VELOCITY = 9.0
 var gravity = 9.8
 var last_velocity = Vector3.ZERO
 var anchor_fall_value = 100
@@ -133,7 +133,8 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			doublejump_cooldown = false
 			falling = false
-	player_camera.fov = 75 * (1+ SPEED/50)
+	#speed affecting the camera
+	player_camera.fov = 75 * (1+ SPEED/100)
 	
 	#decides direction
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -180,7 +181,7 @@ func _physics_process(delta: float) -> void:
 				walking = false
 				sprinting = true
 				crouching = false
-			else: 
+			else:
 				SPEED =  lerp(SPEED,walk_speed,delta*lerp_speed)
 				walking = true
 				sprinting = false
@@ -261,7 +262,7 @@ func _physics_process(delta: float) -> void:
 					velocity.y = 0
 					SPEED = abs(last_velocity.x) + abs(last_velocity.z)
 			elif doublejump_cooldown == false and is_on_floor() == false and wall_running == false:
-				velocity.y = JUMP_VELOCITY
+				velocity.y = JUMP_VELOCITY - 1
 				camera_cnimations.play("jumping_animation")
 				direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(),delta*air_lerp_speed) # lets the player have full control of air movement during a double jump (faster direction changing)
 				doublejump_cooldown = true

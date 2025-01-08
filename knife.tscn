@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dalf21i6w0m5t"]
+
+[ext_resource type="PackedScene" uid="uid://dh07gieokj8ou" path="res://models/knife.glb" id="1_wk3le"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_wk3le")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+
+[node name="M9_M9_0" parent="Sketchfab_model/334c51397a20459ab89e266563de38d2_fbx/RootNode/M9" index="0"]
+layers = 2
